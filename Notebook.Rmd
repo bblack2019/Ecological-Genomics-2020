@@ -1,4 +1,4 @@
-title: "Github Notebook Template"
+title: "Github Ecological Notebook"
 
 output: html_document
 editor_options: 
