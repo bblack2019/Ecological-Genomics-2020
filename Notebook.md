@@ -250,6 +250,20 @@ chunk_output_type: console
 
 ### Entry 21: 2020-01-29, Wednesday.   
 
+Pipeline 
+
+Visualize, Clean, Visualize
+Visualize the quality of raw data (Program: FastQC)
+
+Clean raw data (Program: Trimmomatic)
+
+Visualize the quality of cleaned data (Program: FastQC)
+
+Calculate #’s of cleaned, high quality reads going into mapping
+
+Map (a.k.a. Align) cleaned reads from each sample to the reference assembly to generate sequence alignment files (Program: bwa, Input: .fastq, Output: .sam).
+
+Remove PCR duplicates identified during mapping, and calculate alignment statistics (% of reads mapping succesully, mapping quality scores, average depth of coverage per individual)
 
 
 ------
