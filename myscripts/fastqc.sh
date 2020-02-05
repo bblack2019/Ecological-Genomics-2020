@@ -8,7 +8,7 @@ cd ~/Ecological-Genomics-2020/myresults/
 
 mkdir fastqc
 
-for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/GFM*fastq.gz
+for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/pairedcleanreads/GFM*cl.pd.fq
 
 do
 
