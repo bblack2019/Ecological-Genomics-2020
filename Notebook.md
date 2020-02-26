@@ -245,19 +245,19 @@ chunk_output_type: console
  [srkeller@pbio381 mydata]$ git commit -m "comment about your commit"
  [srkeller@pbio381 mydata]$ git push
 ````
-# To see the full path to your current directory, use the `pwd` command:
+### To see the full path to your current directory, use the `pwd` command:
 ```
 [srkeller@pbio381 ~]$ pwd
  /users/s/r/srkeller
  [srkeller@pbio381 ~]$ 
  ```
-# You should make a new folder (aka, a directory, or “dir”) using the `mkdir` command. Name this folder `mydata`
+### You should make a new folder (aka, a directory, or “dir”) using the `mkdir` command. Name this folder `mydata`
 ```
 [srkeller@pbio381 ~]$ mkdir mydata
 ```
 * Make also a directory for `myscripts` and `myresults` 
 
-# We can then use the `ll` command to list out the contents of any folders and files:
+### We can then use the `ll` command to list out the contents of any folders and files:
 ```
 [srkeller@pbio381 Spring_2020]$ ll
 total 12
@@ -266,7 +266,7 @@ drwxr-xr-x. 3 srkeller users   47 Jan 21 14:29 myresults
 drwxr-xr-x. 3 srkeller users 4096 Jan 21 12:51 myscripts
 -rw-r--r--. 1 srkeller users 7929 Jan 21 12:28 SRKeller_PBIO381_2020_online_notebook.md
 ```
-# We’ve placed the raw Illumina sequence files and a file containing the collection metadata: `/data/project_data/RS_ExomeSeq` 
+### We’ve placed the raw Illumina sequence files and a file containing the collection metadata: `/data/project_data/RS_ExomeSeq` 
 ```
 srkeller@pbio381 ~]$ cd /data/project_data/RS_ExomeSeq
 [srkeller@pbio381 mydata]$ ll
@@ -276,7 +276,7 @@ drwxr-xr-x. 2 srkeller users 42 Jan 21 14:06 metadata
 ```
 * The fastq dir contains the paired-end Illumina sequence files, while the metadata dir contains the collection info. Use cd to navigate inside the metadata folder and ll; you should see a file called RS_Exome_metadata.txt.
 
-# Use the `cp` command, followed by the filename, and the path to your destination (remember the ~ signals your home directory, and each subdirectory is then separated by a /): 
+### Use the `cp` command, followed by the filename, and the path to your destination (remember the ~ signals your home directory, and each subdirectory is then separated by a /): 
 ```
 [srkeller@pbio381 metadata]$ cp RS_Exome_metadata.txt ~/<YourGithubRepoName>/mydata/
 ```
@@ -288,7 +288,7 @@ drwxr-xr-x. 2 srkeller users 42 Jan 21 14:06 metadata
 ```
 * Command `tail` also works for end of data
 
-# Edge samples only for this project
+### Edge samples only for this project
 
 * Use “generalized regular expression" , also known as the `grep` command.
 * The option “-w” option tells `grep` to match the entire field has to be matched as-is.
@@ -299,12 +299,12 @@ AB      08      AB_08   TN      E       09002016        35.55212        83.49259
 AB      12      AB_12   TN      E       09002016        35.5389 83.49463        1750    36.8
 [...]
 ```
-# Eery UNIX command-line program has a built-in `man` page that you can call up to help you. Just type `man` and then the program name and it will give you the manual (small excerpt shown below).
+### Eery UNIX command-line program has a built-in `man` page that you can call up to help you. Just type `man` and then the program name and it will give you the manual (small excerpt shown below).
 ```
 [srkeller@pbio381 mydata]$ man grep
 ```
 
-# “Piping”
+### “Piping”
 
 * One of the most useful aspects of UNIX is the ability to take the output from one command and pass it along as standard input (termed ‘stdin’) into another command without having to save the intermediate files. 
 
@@ -316,7 +316,7 @@ AB      12      AB_12   TN      E       09002016        35.5389 83.49463        
 [srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt | wc -l
 110
 ```
-# Let’s find the # of unique populations that are contained in the edge
+### Let’s find the # of unique populations that are contained in the edge
 
 * The new commands are: `cut` to get just the column (also known as a “field”) containing the population code (the first col, “-f1”“), and `uniq` to collapse the number of rows to just 1 per population. Here’s the whole thing in one go:
 ```
@@ -329,25 +329,25 @@ CRA
 
 [...]
 ```
-# cominded all above to see how many unique edge pops: 
+### cominded all above to see how many unique edge pops: 
 ```
 [srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt | cut -f1 | uniq | wc -l
 ```
 
-# Wildcard 
+### Wildcard 
 
 * Now, what if we want to do operations on multiple files at a time?
 
 * There’s a way to do this quickly using the wildcard character `*`. With the wildcard, the `*` takes the place of any character, and in fact any length of characters.
 
-# Let’s make a new folder called “metadata” and then move all the text files we’ve got so far into it:
+### Let’s make a new folder called “metadata” and then move all the text files we’ve got so far into it:
 ```
 [srkeller@pbio381 mydata]$ mkdir metadata
 [srkeller@pbio381 mydata]$ mv *txt metadata/
 [srkeller@pbio381 mydata]$ ll metadata/
 ```
 
-# Remove command: 
+### Remove command: 
 
 * You can remove files and folders with the `rm` command. 
 
@@ -360,7 +360,7 @@ CRA
 ```
 * NOTE: this is equivalent to `rm metadata/AB.txt`
 
-# Adjust defaul settings for remove `rm`: 
+### Adjust defaul settings for remove `rm`: 
 1. `cd` to your home directory (~/
 2. List all the files, including “hidden” ones that aren’t usually shown. To do this, use `ll -a`
 3. Look for a file called “.bashrc” — this contains your settings for how you interact with the server when you log in.
@@ -406,7 +406,7 @@ alias rm='rm -i'
 
 11. These changes won’t take effect until you log out (type exit to log out of the server). But from now on, every time you log in, the server will remember that you want a reminder before deleting any of your work.
 
-# Add all chnages to repo and get with above commands. 
+### Add all chnages to repo and get with above commands. 
 
 
 ------
