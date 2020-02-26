@@ -245,6 +245,169 @@ chunk_output_type: console
  [srkeller@pbio381 mydata]$ git commit -m "comment about your commit"
  [srkeller@pbio381 mydata]$ git push
 ````
+# To see the full path to your current directory, use the `pwd` command:
+```
+[srkeller@pbio381 ~]$ pwd
+ /users/s/r/srkeller
+ [srkeller@pbio381 ~]$ 
+ ```
+# You should make a new folder (aka, a directory, or “dir”) using the `mkdir` command. Name this folder `mydata`
+```
+[srkeller@pbio381 ~]$ mkdir mydata
+```
+* Make also a directory for `myscripts` and `myresults` 
+
+# We can then use the `ll` command to list out the contents of any folders and files:
+```
+[srkeller@pbio381 Spring_2020]$ ll
+total 12
+drwxr-xr-x. 3 srkeller users   49 Jan 21 14:29 mydata
+drwxr-xr-x. 3 srkeller users   47 Jan 21 14:29 myresults
+drwxr-xr-x. 3 srkeller users 4096 Jan 21 12:51 myscripts
+-rw-r--r--. 1 srkeller users 7929 Jan 21 12:28 SRKeller_PBIO381_2020_online_notebook.md
+```
+# We’ve placed the raw Illumina sequence files and a file containing the collection metadata: `/data/project_data/RS_ExomeSeq` 
+```
+srkeller@pbio381 ~]$ cd /data/project_data/RS_ExomeSeq
+[srkeller@pbio381 mydata]$ ll
+drwxr-xr-x. 3 srkeller users 31 Jan 16 13:16 fastq
+drwxr-xr-x. 2 srkeller users 42 Jan 21 14:06 metadata
+[srkeller@pbio381 mydata]$ 
+```
+* The fastq dir contains the paired-end Illumina sequence files, while the metadata dir contains the collection info. Use cd to navigate inside the metadata folder and ll; you should see a file called RS_Exome_metadata.txt.
+
+# Use the `cp` command, followed by the filename, and the path to your destination (remember the ~ signals your home directory, and each subdirectory is then separated by a /): 
+```
+[srkeller@pbio381 metadata]$ cp RS_Exome_metadata.txt ~/<YourGithubRepoName>/mydata/
+```
+
+* We can use the `head` command to peek at the first 10 lines of data; or more generally, `head -n # filename` will show the first # lines of data:
+```
+[srkeller@pbio381 metadata]$ head RS_Exome_metadata.txt
+[srkeller@pbio381 metadata]$ head -n 20 RS_Exome_metadata.txt
+```
+* Command `tail` also works for end of data
+
+# Edge samples only for this project
+
+* Use “generalized regular expression" , also known as the `grep` command.
+* The option “-w” option tells `grep` to match the entire field has to be matched as-is.
+```
+[srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt
+AB      05      AB_05   TN      E       09002016        35.55297        83.49438        1812    57.7
+AB      08      AB_08   TN      E       09002016        35.55212        83.49259        1785    44.3
+AB      12      AB_12   TN      E       09002016        35.5389 83.49463        1750    36.8
+[...]
+```
+# Eery UNIX command-line program has a built-in `man` page that you can call up to help you. Just type `man` and then the program name and it will give you the manual (small excerpt shown below).
+```
+[srkeller@pbio381 mydata]$ man grep
+```
+
+# “Piping”
+
+* One of the most useful aspects of UNIX is the ability to take the output from one command and pass it along as standard input (termed ‘stdin’) into another command without having to save the intermediate files. 
+
+* Uses character: `|` 
+
+* Example: Say we wanted to create tally of many samples correspond to the Edge region. 
+    * We can use `grep` to do the search and use the pipe (|) to send the results of grep to the `wc -l` command, which will tally up the number of lines.
+```
+[srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt | wc -l
+110
+```
+# Let’s find the # of unique populations that are contained in the edge
+
+* The new commands are: `cut` to get just the column (also known as a “field”) containing the population code (the first col, “-f1”“), and `uniq` to collapse the number of rows to just 1 per population. Here’s the whole thing in one go:
+```
+[srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt | cut -f1 | uniq 
+AB
+BFA
+BRB
+CR
+CRA
+
+[...]
+```
+# cominded all above to see how many unique edge pops: 
+```
+[srkeller@pbio381 mydata]$ grep -w "E" RS_Exome_metadata.txt | cut -f1 | uniq | wc -l
+```
+
+# Wildcard 
+
+* Now, what if we want to do operations on multiple files at a time?
+
+* There’s a way to do this quickly using the wildcard character `*`. With the wildcard, the `*` takes the place of any character, and in fact any length of characters.
+
+# Let’s make a new folder called “metadata” and then move all the text files we’ve got so far into it:
+```
+[srkeller@pbio381 mydata]$ mkdir metadata
+[srkeller@pbio381 mydata]$ mv *txt metadata/
+[srkeller@pbio381 mydata]$ ll metadata/
+```
+
+# Remove command: 
+
+* You can remove files and folders with the `rm` command. 
+
+   * UNIX will not ask if you really mean it before getting rid of it forever(!), so this can be dangerous if you’re not paying attention.
+   
+* As an example, let’s use our `grep` command to pull out the samples that belong to the “AB”" population and save it to a new file called`metatdata/AB.txt`. But perhaps we later decide we’re not going to work with those samples, so we use `rm` to delete that file:
+```
+[srkeller@pbio381 mydata]$ cd metadata/
+[srkeller@pbio381 mydata]$ rm AB.txt 
+```
+* NOTE: this is equivalent to `rm metadata/AB.txt`
+
+# Adjust defaul settings for remove `rm`: 
+1. `cd` to your home directory (~/
+2. List all the files, including “hidden” ones that aren’t usually shown. To do this, use `ll -a`
+3. Look for a file called “.bashrc” — this contains your settings for how you interact with the server when you log in.
+4. We’re going to open this file and edit it to add a setting to request that `rm` confirms deletion with us. To edit text files on the fly in UNIX, you can use the built-in text editor, “vim”: `vim .bashrc`
+5.
+```
+# .bashrc
+
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+          . /etc/bashrc
+  fi
+
+  # Uncomment the following line if you don't like systemctl's auto-paging feature:
+  # export SYSTEMD_PAGER=
+
+  # User specific aliases and functions
+```
+6. Use your arrow key to move your cursor down to the last line, below “”# User specific aliases and functions" — this is where we’re going to insert our new function.
+7. By default, vim is in read-only mode when it opens files. To go into edit mode, press your “i” key (for “insert”). You are now able to make changes to the file.
+8. Add the following text on a new line directly below the “# User specific…” line:
+```
+alias rm='rm -i'
+```
+9. Your file should now look like this:
+```
+# .bashrc
+
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+          . /etc/bashrc
+  fi
+
+  # Uncomment the following line if you don't like systemctl's auto-paging feature:
+  # export SYSTEMD_PAGER=
+
+  # User specific aliases and functions
+
+  alias rm='rm -i'
+
+```
+10. You’re now ready to escape out of edit mode (hit the `escape` key), write (save) your changes (type `:w`), and quit vim (type `:q`). You can also combine this into a single command `:wq`
+
+11. These changes won’t take effect until you log out (type exit to log out of the server). But from now on, every time you log in, the server will remember that you want a reminder before deleting any of your work.
+
+# Add all chnages to repo and get with above commands. 
+
 
 ------
 <div id='id-section17'/>   
@@ -427,19 +590,19 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 
 1. Ten maternal families total; sample labels are “POP_FAM”
 
-* ASC_06, BRU_05, ESC_01, XBM_07, NOR_02, CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
+ * ASC_06, BRU_05, ESC_01, XBM_07, NOR_02, CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
 
 2. Two Source Climates (SourceClim:
-* HotDry (5 fams): ASC_06, BRU_05, ESC_01, XBM_07, NOR_02
-* CoolWet (5 fams): CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
+ * HotDry (5 fams): ASC_06, BRU_05, ESC_01, XBM_07, NOR_02
+ * CoolWet (5 fams): CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
 3. Experimental Treatments (Trt):
-* Control: watered every day, 16:8 L:D photoperiod at 23C:17C temps
-* Heat: 16:8 L:D photoperiod at 35C:26C temps (50% increase in day and night temps over controls)
-* Heat+Drought: Heat plus complete water witholding
+ * Control: watered every day, 16:8 L:D photoperiod at 23C:17C temps
+ * Heat: 16:8 L:D photoperiod at 35C:26C temps (50% increase in day and night temps over controls)
+ * Heat+Drought: Heat plus complete water witholding
 4. Three time periods (Day):
-* Harvested tissues on Days 0, 5, and 10 (from one year to 6 months old seedlings) 
-* Extracted RNA from whole seedlings (root, stem, needle tissue)
-* Goal: Aimed for 5 biological reps per Trt x SourceClim x Day combo, but day5 had few RNA extractions that worked
+ * Harvested tissues on Days 0, 5, and 10 (from one year to 6 months old seedlings) 
+ * Extracted RNA from whole seedlings (root, stem, needle tissue)
+ * Goal: Aimed for 5 biological reps per Trt x SourceClim x Day combo, but day5 had few RNA extractions that worked
 
 # Realized sample replication after sequencing: N=76
 * Just sequence data from one direction 
@@ -459,13 +622,13 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 
 # What questions can we ask/address with this experimental design, with these data?
 *Factors: 
-** Treatment: C, H, D 
-** Source climate: Hot/dry, Cool/Wet
-** Time: 0, 5, 10 days 
+ * Treatment: C, H, D 
+ * Source climate: Hot/dry, Cool/Wet
+ * Time: 0, 5, 10 days 
 
 1. Do individuals from diverent climate have different gene expression to 
- * " at different conditions? (exp = source clim + treatment + (SC x trt)
- * " at different time points? (exp = time + source clim (time x SC) + fam)
+  * " at different conditions? (exp = source clim + treatment + (SC x trt)
+  * " at different time points? (exp = time + source clim (time x SC) + fam)
 2. Does souce climate provide different methods to deal with stress?
 3. What particular genes are responsible for these responses? 
 4. Expression cause a different from different alleles? 
