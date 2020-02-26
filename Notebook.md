@@ -23,8 +23,8 @@ chunk_output_type: console
       * [Entry 2: 2020-01-14, Tuesday](#id-section2)
     * [Entry 3: 2020-01-15, Wednesday](#id-section3)
      * [Entry 4: 2020-01-16, Thursday](#id-section4)
-       * [Entry 5: 2020-01-17, Friday](#id-section5)
-       * [Entry 6: 2020-01-20, Monday](#id-section6)
+      * [Entry 5: 2020-01-17, Friday](#id-section5)
+      * [Entry 6: 2020-01-20, Monday](#id-section6)
       * [Entry 7: 2020-01-21, Tuesday](#id-section7)
     * [Entry 8: 2020-01-22, Wednesday](#id-section8)
      * [Entry 9: 2020-01-23, Thursday](#id-section9)
@@ -443,7 +443,7 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 
 # Realized sample replication after sequencing: N=76
 * Just sequence data from one direction 
-** 3' tagging RNA data 
+  * 3' tagging RNA data 
 * 5N reps for each temperature type 
 * Not all samples are equal number with enqual distrobution
 
@@ -452,10 +452,10 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 * Samples >1 ng/ul were sent to Cornell for 3’ tag sequencing (Great location for this type of data, good turn around time, been doing it the longest, How did you recieve the data?) 
 * Library prep followed the LexoGen protocol and sequencing was on 1 lane of a NextSeq500 (1x86 bp reads)
 * Samples were demultiplexed and named according to the convention: POP_FAM_TRT_DAY (Named like this) 
-** Keep files name all the same length, downstreams inforamtics easier. 
+   * Keep files name all the same length, downstreams inforamtics easier. 
 * UVM core facility 2-3x more expensive than other facilities. (Consultation was lower and quality as well). 
 * If all fails: who pays? Contamination vs degreadation: taxa specific issues. 
-** look at other papers of similar extraction, protocols. 
+   * look at other papers of similar extraction, protocols. 
 
 # What questions can we ask/address with this experimental design, with these data?
 *Factors: 
@@ -464,8 +464,8 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 ** Time: 0, 5, 10 days 
 
 1. Do individuals from diverent climate have different gene expression to 
-** " at different conditions? (exp = source clim + treatment + (SC x trt)
-** " at different time points? (exp = time + source clim (time x SC) + fam)
+ * " at different conditions? (exp = source clim + treatment + (SC x trt)
+ * " at different time points? (exp = time + source clim (time x SC) + fam)
 2. Does souce climate provide different methods to deal with stress?
 3. What particular genes are responsible for these responses? 
 4. Expression cause a different from different alleles? 
@@ -489,7 +489,11 @@ Downloaded from Congenie.org <- conifer resource
 * ASC (C,D,H), BRU (C,D,H), ETC...
 
 My pop is: ESC D & H 
-
+Script to focus on just this is 
+```
+/data/project_data/RS_RNAseq/fastq/ESC_01_D*R1.fastq.gz
+/data/project_data/RS_RNAseq/fastq/ESC_01_H*R1.fastq.gz
+```
 #Clean the reads with Trimmomatic
 ```
 #!/bin/bash
