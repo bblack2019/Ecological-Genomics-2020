@@ -442,20 +442,48 @@ alias rm='rm -i'
 
 ### Entry 21: 2020-01-29, Wednesday.   
 
-Pipeline 
+### Red Spruce Background info 
 
-Visualize, Clean, Visualize
-Visualize the quality of raw data (Program: FastQC)
+* Red spruce is a coniferous tree that plays a prominent role in montane communities throughout the Appalachians. It thrives in the cool, moist climates of the high elevation mountains of the Apppalachians and northward along the coastal areas of Atlantic Canada.
 
-Clean raw data (Program: Trimmomatic)
+* One region where populations are particular vulnerable to climate change is in the low-latitude trailing edge of the range, from Maryland to Tennessee, where populations are highly fragmented and isolated on mountaintops. These “island” populations are remnants of spruce forests that covered the southern U.S. glaciers extended as far south as Long Island, NY. As the climate warmed at the end of the Pleistocene (~20K years ago), red spruce retreated upward in elevation to these mountaintop refugia, where they are now highlty isolated from other such stands and from the core of the range further north.
 
-Visualize the quality of cleaned data (Program: FastQC)
+* A goal of our study is to better understand the genetic resource represented by these fragemented edge populations, and to use that information to help inform conservation biologists working to restore red spruce in this region. A close partner in this effort is the Nature Conservancy and the Central Appalachian Spruce Restoration Initiative (CASRI) – a multi-partner group dedicated to restoring and enhancing red spruce populations to promote their resilience under climate change.
 
-Calculate #’s of cleaned, high quality reads going into mapping
 
-Map (a.k.a. Align) cleaned reads from each sample to the reference assembly to generate sequence alignment files (Program: bwa, Input: .fastq, Output: .sam).
+* Goals: 
+1. characterize the genetic diversity and population structure across the range
+2. identify regions of the genome that show evidence of positive selection in response to climate gradients
+3. to map the genetic basis of climate adaptive phenotypes
 
-Remove PCR duplicates identified during mapping, and calculate alignment statistics (% of reads mapping succesully, mapping quality scores, average depth of coverage per individual)
+* We hope to use this information to inform areas of the range most likely to experience climate maladaptation, and to help guide mitigation strategies.
+
+* Experimental design: 
+   * In 2017, we collected seeds and needle tissue from 340 mother trees at 65 populations spread throughout the range. We extracted whole genomic DNA from needles to use for exome capture sequencing.
+   * Sample size in the edge region = 110 mother trees from 23 populations.
+   * Exome capture was designed based on transcriptomes from multiple tissues and developmental stages in the related species, white spruce (P. glauca).
+   * Bait design used 2 transcriptomes previously assembled by Rigault et al. (2011) and Yeaman et al. (2014).
+   * A total of 80,000 120bp probes were designed, including 75,732 probes within or overlapping exomic regions, and an additional 4,268 probes in intergenic regions.
+   * Each probe was required to represent a single blast hit to the P. glauca reference genome of at least 90bp long and 85% identity, covering 38,570 unigenes.
+   * Libraries were made by random mechanical shearing of DNA (250 ng -1ug) to an average size of 400 bp followed by end-repair reaction, ligation of an adenine residue to the 3’-end of the blunt-end fragments to allow the ligation of barcoded adapters, and PCR-amplification of the library. SureSelect probes (Agilent Technologies: Santa Clara, CA) were used for solution-based targeted enrichment of pools of 16 libraries, following the SureSelectxt Target Enrichment System for Illumina Paired-End Multiplexed Sequencing Library protocol.
+   * Libraries were sequenced on a single run of a Illumina HiSeq X to generate paired-end 150-bp reads.
+   
+### Pipeline 
+
+1. Visualize, Clean, Visualize
+* Visualize the quality of raw data (Program: FastQC)
+
+* Clean raw data (Program: Trimmomatic)
+
+* Visualize the quality of cleaned data (Program: FastQC)
+
+2. Calculate #’s of cleaned, high quality reads going into mapping
+
+3. Map (a.k.a. Align) cleaned reads from each sample to the reference assembly to generate sequence alignment files (Program: bwa, Input: .fastq, Output: .sam).
+
+4. Remove PCR duplicates identified during mapping, and calculate alignment statistics (% of reads mapping succesully, mapping quality scores, average depth of coverage per individual)
+
+### Visualize, Clean, Visualize protocol 
 
 
 ------
