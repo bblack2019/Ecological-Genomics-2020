@@ -217,11 +217,11 @@ chunk_output_type: console
 
 # Getting Started
 
-*To login 
+* To login 
    bblack@pbio381.uvm.edu
    bblack@pbio381.uvm.edu password: (same as login) 
 
-*To see the full path to your current directory, use the pwd command:
+* To see the full path to your current directory, use the pwd command:
   [srkeller@pbio381 ~]$ pwd
   /users/s/r/srkeller
   [srkeller@pbio381 ~]$
@@ -229,14 +229,15 @@ chunk_output_type: console
   So, the full path to my working directory on the server is: 
   /users/s/r/bblack/
   
-*Github comands: 
+* Github comands: 
   1. Clone repo: 
   git clone https://github.com/bblack2019/Ecological-Genomics-2020.git
   
  2. Save add changes to repo, commit them, and push them to server:
- [srkeller@pbio381 mydata]$ git add --all .
- [srkeller@pbio381 mydata]$ git commit -m "comment about your commit"
- [srkeller@pbio381 mydata]$ git push
+ 
+ -[srkeller@pbio381 mydata]$ git add --all .
+ -[srkeller@pbio381 mydata]$ git commit -m "comment about your commit"
+ -[srkeller@pbio381 mydata]$ git push
  
 
 ------
