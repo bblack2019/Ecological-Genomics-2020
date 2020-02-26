@@ -419,6 +419,108 @@ Remove PCR duplicates identified during mapping, and calculate alignment statist
 
 ### Entry 39: 2020-02-24, Monday.   
 
+# Red spruce stress transcriptomics experiment
+
+* The purpose of this experiment was to sample red spruce genetic variation from sites that were polarized into cool & wet vs. hot and dry based on historic climate and to assess the gene expression responses of individuals from these habitats in response to experimental treatments of heat and heat+drought.
+
+#  Experimental Design:
+
+1. Ten maternal families total; sample labels are “POP_FAM”
+
+* ASC_06, BRU_05, ESC_01, XBM_07, NOR_02, CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
+
+2. Two Source Climates (SourceClim:
+* HotDry (5 fams): ASC_06, BRU_05, ESC_01, XBM_07, NOR_02
+* CoolWet (5 fams): CAM_02, JAY_02, KAN_04, LOL_02, MMF_13
+3. Experimental Treatments (Trt):
+* Control: watered every day, 16:8 L:D photoperiod at 23C:17C temps
+* Heat: 16:8 L:D photoperiod at 35C:26C temps (50% increase in day and night temps over controls)
+* Heat+Drought: Heat plus complete water witholding
+4. Three time periods (Day):
+* Harvested tissues on Days 0, 5, and 10 (from one year to 6 months old seedlings) 
+* Extracted RNA from whole seedlings (root, stem, needle tissue)
+* Goal: Aimed for 5 biological reps per Trt x SourceClim x Day combo, but day5 had few RNA extractions that worked
+
+# Realized sample replication after sequencing: N=76
+* Just sequence data from one direction 
+** 3' tagging RNA data 
+* 5N reps for each temperature type 
+* Not all samples are equal number with enqual distrobution
+
+# Library prep and sequencing
+* Samples were quantified for RNA concentration and quality on the Bioanalyzer
+* Samples >1 ng/ul were sent to Cornell for 3’ tag sequencing (Great location for this type of data, good turn around time, been doing it the longest, How did you recieve the data?) 
+* Library prep followed the LexoGen protocol and sequencing was on 1 lane of a NextSeq500 (1x86 bp reads)
+* Samples were demultiplexed and named according to the convention: POP_FAM_TRT_DAY (Named like this) 
+** Keep files name all the same length, downstreams inforamtics easier. 
+* UVM core facility 2-3x more expensive than other facilities. (Consultation was lower and quality as well). 
+* If all fails: who pays? Contamination vs degreadation: taxa specific issues. 
+** look at other papers of similar extraction, protocols. 
+
+# What questions can we ask/address with this experimental design, with these data?
+*Factors: 
+** Treatment: C, H, D 
+** Source climate: Hot/dry, Cool/Wet
+** Time: 0, 5, 10 days 
+
+1. Do individuals from diverent climate have different gene expression to 
+** " at different conditions? (exp = source clim + treatment + (SC x trt)
+** " at different time points? (exp = time + source clim (time x SC) + fam)
+2. Does souce climate provide different methods to deal with stress?
+3. What particular genes are responsible for these responses? 
+4. Expression cause a different from different alleles? 
+
+
+# Data Processing Pipeline:
+1. FastQC on raw reads –> Trimmomatic (done!) –> FastQC on cleaned reads
+2. Reference transcriptome:
+```
+/data/project_data/RS_RNASeq/ReferenceTranscriptome/Pabies1.0-all-cds.fna.gz
+```
+Downloaded from Congenie.org <- conifer resource 
+3. 66,632 unigenes, consisting of 26,437 high-confidence gene models, 32,150 medium-confidence gene models, and 8,045 low-confidence gene models
+4. Use Salmon to simulateously map reads and quantify abundance.
+5. Import the data into DESeq2 in R for data normalization, visualization, and statistical tests for differential gene expression.
+
+# Choose samples to visualize for quality (FastQC) and to map (Salmon)
+
+* Ignoring `day` for the moment, there are 10 PopulationByFamily groups (`POP_XX`) and three treatment groups (`C`, `H`, and `D`), so 30 groups. If you each take two of these pop by treatment groups to process, we’ll have all the samples covered. `cd` into the `/data/project_data/RS_RNASeq/fastq` directory to view the files. Let’s write on the board each of our chosen groups.
+
+* ASC (C,D,H), BRU (C,D,H), ETC...
+
+My pop is: ESC D & H 
+
+#Clean the reads with Trimmomatic
+```
+#!/bin/bash
+
+cd /data/project_data/RS_RNASeq/fastq/
+
+########## Trimmomatic for single end reads
+
+for R1 in *R1.fastq.gz  
+
+do 
+    echo "starting sample ${R1}"
+    f=${R1/_R1.fastq.gz/}
+    name=`basename ${f}`
+
+    java -classpath /data/popgen/Trimmomatic-0.33/trimmomatic-0.33.jar org.usadellab.trimmomatic.TrimmomaticSE \
+        -threads 1 \
+        -phred33 \
+         "$R1" \
+         /data/project_data/RS_RNASeq/fastq/cleanreads/${name}_R1.cl.fq \
+        ILLUMINACLIP:/data/popgen/Trimmomatic-0.33/adapters/TruSeq3-SE.fa:2:30:10 \
+        LEADING:20 \
+        TRAILING:20 \
+        SLIDINGWINDOW:6:20 \
+        HEADCROP:12 \
+        MINLEN:35 
+     echo "sample ${R1} done"
+done 
+```
+
+
 
 
 ------
