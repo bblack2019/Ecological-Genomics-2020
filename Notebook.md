@@ -993,8 +993,8 @@ done
 * Makes alignment harder to each forward and reverse section of genome
 
 #### Running the Data 
-* Make sure you "screen" before you run the script 
-* My script is AA_F00_1
+* Make sure you `screen` before you run the script 
+* My script is `AA_F00_1`
 * Tutorial will be posted. Make sure its done by next Wednesday
 * Could take 8-14 hours. So make sure to start it early. 
 
