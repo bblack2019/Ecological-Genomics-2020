@@ -519,6 +519,7 @@ alias rm='rm -i'
 
 ### Entry 26: 2020-02-05, Wednesday.   
 
+# Need to update notes here 
 
 
 ------
@@ -554,7 +555,7 @@ alias rm='rm -i'
 
 ### Entry 31: 2020-02-12, Wednesday.   
 
-
+# Need to update notes here 
 
 ------
 <div id='id-section32'/>   
@@ -589,7 +590,7 @@ alias rm='rm -i'
 
 ### Entry 36: 2020-02-19, Wednesday.   
 
-
+# Need to update notes here 
 
 ------
 <div id='id-section37'/>   
@@ -765,7 +766,7 @@ done
 
 ### Entry 46: 2020-03-04, Wednesday.   
 
-
+# Need to update notes here 
 
 ------
 <div id='id-section47'/>   
@@ -835,7 +836,7 @@ done
 
 ### Entry 56: 2020-03-18, Wednesday.   
 
-
+# Need to update notes here 
 
 ------
 <div id='id-section57'/>   
