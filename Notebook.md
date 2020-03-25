@@ -870,7 +870,142 @@ done
 
 ### Entry 61: 2020-03-25, Wednesday.   
 
+## Info-Update 
 
+### Mechanism of Epigenetics 
+* microRNA
+* phosphorylation 
+* methylation 
+* histones 
+
+### Changes to DNA methylation 
+* Cytosine can go to Uracil after deanimation (can be corrected back) 
+* Methalated cytosine can to Thymine ater demanimation (no corrected back) 
+
+### Functional conesquneces of Methylation 
+* Promotoers and enhancers 
+  * High methylation = inhibtion of expression 
+  * change chromatin structure 
+  * inhibts transcription factors 
+* Intergenic 
+  * Silencing TE, etc 
+* Gene Body 
+  * gene body = intron and exon
+  * high methylation inhibits random expression 
+  * methylation allows for more stabalization of expression 
+  * gene with low meth levels have higher to change response in environment
+    * both hypotheses, not looked at in many organisms
+* Literature review of different organisms of functional consequnces of methylation 
+
+### Different Organism Methylation Phylogeny 
+* Three different types of metyl: CG, CHG, CHH
+* Plants have relativley high CHG, CG methylation that is heritable 
+* Methylation patterns vary a lot between spp
+
+### Patterns of Methylation with Genome
+* Dip in promoter region methylation 
+* Gene body also tend to be highly methylated in spp 
+ 
+ ### Bisulfite Seq 
+ * Frag genomic dna sample 
+ * Conversion of C to T 
+ * Any unmethalyted C will be converted to uracil 
+ * Able to tell which were methylated and percentage 
+ * What proportion of C at each site are methylated within many reads from one region of genome. 
+ * Can be continuous trait. Non binary (some cells meythlated vs others that are not) 
+ * Varies between organisms. Are also pooled from many indivisduals. 
+ * Vertibrates usual on or off but can change for invetebrates. 
+   * Early developmental pattern? Transmitted through cell divsions as opposed to acute response. 
+   
+ ## Liew et al 2020 Corals Paper Discussion 
+ 
+ ### Patterns in Corals
+ * Epigenetics important for long lived organims in particular 
+ * Hertiable methyl patterns could be essential to adapt to change; ie resiliance in offspring in similar environments. 
+ * Climate change implications; predictive patterns of change. 
+ 
+### Figure 1 
+* AD pop does experience bleaching, F population does not have bleaching. 
+* Missing larva from one whole population. Two crosses within the AD population 
+* RNA seq data would have helped a lot to demonstrate the point they are trying to make. 
+
+### Figure 2 
+* Does this really show that genetype does not correlate with methylation? 
+* Reid and Melissa seems to think that there it does not. R=0.10 is good for Reid when compared to the entire genome. Signifcance for both genic and exonic regions. 
+* Steve pointed out the demographic aspect of the varience described by the genic and exonic regions. 
+
+### Figure 3 
+* Does this show evidence for enviromental cause of metyhlation? 
+* Verdict seems to be undecieded 
+* Melissa says more work to be done. 
+
+## Coding Session 
+
+### Copepod Selection Experiment 
+
+#### The organism 
+* Sample organism: Arcartia tonsa
+* Very abundance zoplankton > important ecological role. 
+* Intresting b/c: large pops, large genetic diversity, and many different environments. High plasticity 
+* Good model for how organisms could change in response to environment. Climate change. 
+* Multigenerational experiments. 10000 of indviduals. 10 day genration time. 
+
+#### Experimental Design 
+* Treatments: Cntrl (AA), high co2 (AH), high temp (HA), temp+co2 (HH)
+* Expect shifts in genrational and epigenetic responses. 
+* Field collected and maintained for 3 generations before split up. 
+* Samples collected at F0 and F25 
+* 4 reps per treatment 
+
+#### RRBS 
+* "Reduced reference Bis sulfite sequencing"
+* Reduced genome > Rad seq aproach >> restriction sites cuts (Mspl). Insenstive to meythlation. 
+* End repair 
+* adpater ligation 
+* Bisulfite conversion of all unmeythl Cs to Ts 
+* Small amount of DNA from E. coli as control to check downstream effects of how efficient bisulfite conversion was. 
+
+#### Hypotheses and Questions 
+1. Are there consistent patterns in each treatmnet group of methylations patterns? 
+2. Are the stressfull treatements leading to responses that infer resiliance? 
+3. What proportion of methyl sites are genic vs non genic? 
+4. Is the combinded (TxCo2) treatment additive or mixed in response from the other two responses? 
+
+#### Pipline 
+1. Clean and visualize 
+2. Align to reference genome
+3. extract methylation calls 
+4. Process filter calls 
+5. Summary figures (PCA, etc) 
+6. Test for differential methylation 
+
+#### Cleaning 
+* A lot more Ts due to Cs due to bisultife conversions on forward strand
+* A lot of As in reverse strand due to the reverse complient of the Ts 
+* Error increase at the end due to un methylated primers. 
+* Primer contamination removed as well after trimming 
+* Melissa says begging also strange but Reid did not cut off the start of the read. 
+
+#### Aligning with Bismark 
+* Aligning is different > some reads with almost no Cs and no Ts 
+* Convert from G to C and T to A 
+* Makes alignment harder to each forward and reverse section of genome
+
+#### Running the Data 
+* Make sure you "screen" before you run the script 
+* My script is AA_F00_1
+* Tutorial will be posted. Make sure its done by next Wednesday
+* Could take 8-14 hours. So make sure to start it early. 
+
+
+
+
+
+
+
+
+ 
+ 
 
 ------
 <div id='id-section62'/>   
