@@ -1062,8 +1062,60 @@ done
 
 ### Entry 69: 2020-04-06, Monday.   
 
+### Updates 
+* Monday, 4/6 - Intro/background on group projects; start sharing ideas, groups coalesce
+* Wed, 4/8 - open lab related to HW #3 - half time; second half - groups meet to develop proposal
+* Friday, 4/10 - HW #3 due
+* Monday, 4/13 - Groups present on proposed projects (brief: ~5 slides to present study system, questions/hypotheses, approach, and anticipated results/outcomes)
+* Updated code on general area of Slack
 
+### Review of Sections 
+* Sections:
+   1. Populations genomics of diversity within red spruce range edge populations.
+   * Genomic DNA, diversity metrics (of sequence) 
+   2. Transcriptomics of red spruce gene expression to heat and drought stressors. 
+   * expression diversity, expression data. 
+   3. Epigenomics: Epigenmoics of copepod methylation during experimental evolution under temp and CO2 stress. 
 
+ * Mapping
+ * Assessing quality, cleaning 
+ * Statistics
+ * Scratching surface with of what data shows. 
+ 
+ ### Group Projects 
+ * Goals: 
+  1. Give opportunity to dig deepers in to area of intrests. 
+  2. Pose new questions and learn new analyses/tools. 
+  3. Prob analysis of assumptions or choices made. 
+  4. Inegrating across existing or new datasets 
+   * Genomic seq
+   * Transcriptomic seq
+   * Epigenmoic seq
+     * Functional annotation data
+     * Environmental data 
+     * Phenotype data 
+
+* Expectation: 
+  * Work in teams (2-5 students) 
+  * Develop questions
+  * Choose to work with one or more class datasets 
+  * Present the intial plan for feedback (week from today) 
+  * Devirse and implement analysis strategy (divide and conquer) 
+  * 3 days of open lab 
+  * Present final results at the end 
+  * write and final paper (individual or group co-authored) 
+
+* Agenda for today: 
+  * Refresh on each of the class datasets
+   * Opportunity for additonal student datasets
+  * Start brainstorm 
+  * Coalesce into groups based on shared ideas/questions/tools
+  * Small group meetings to start planning
+
+* Brainstorming document: 
+ * https://uvmoffice.sharepoint.com/sites/EcologicalGenomics/_layouts/15/Doc.aspx?sourcedoc={5aba0c0e-6810-4131-9768-4af55efec99c}&action=view&wd=target%28_Collaboration%20Space%2FGroup%20Projects.one%7C5c40bf9e-4e7c-461d-ac09-66adeace8753%2FBrainstorming%20for%20Group%20Projects%7C3661696a-383e-4875-82be-c0cf9118e0a0%2F%29
+ 
+ 
 ------
 <div id='id-section70'/>   
 
