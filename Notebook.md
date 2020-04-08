@@ -1106,11 +1106,11 @@ pdf("KOS_diversity_stats.pdf")
 
 ### Entry 39: 2020-02-24, Monday.   
 
-# Red spruce stress transcriptomics experiment
+#### Red spruce stress transcriptomics experiment
 
 * The purpose of this experiment was to sample red spruce genetic variation from sites that were polarized into cool & wet vs. hot and dry based on historic climate and to assess the gene expression responses of individuals from these habitats in response to experimental treatments of heat and heat+drought.
 
-#  Experimental Design:
+####  Experimental Design:
 
 1. Ten maternal families total; sample labels are “POP_FAM”
 
@@ -1134,7 +1134,7 @@ pdf("KOS_diversity_stats.pdf")
 * 5N reps for each temperature type 
 * Not all samples are equal number with enqual distrobution
 
-# Library prep and sequencing
+#### Library prep and sequencing
 * Samples were quantified for RNA concentration and quality on the Bioanalyzer
 * Samples >1 ng/ul were sent to Cornell for 3’ tag sequencing (Great location for this type of data, good turn around time, been doing it the longest, How did you recieve the data?) 
 * Library prep followed the LexoGen protocol and sequencing was on 1 lane of a NextSeq500 (1x86 bp reads)
@@ -1144,7 +1144,7 @@ pdf("KOS_diversity_stats.pdf")
 * If all fails: who pays? Contamination vs degreadation: taxa specific issues. 
    * look at other papers of similar extraction, protocols. 
 
-# What questions can we ask/address with this experimental design, with these data?
+#### What questions can we ask/address with this experimental design, with these data?
 *Factors: 
  * Treatment: C, H, D 
  * Source climate: Hot/dry, Cool/Wet
@@ -1158,7 +1158,7 @@ pdf("KOS_diversity_stats.pdf")
 4. Expression cause a different from different alleles? 
 
 
-# Data Processing Pipeline:
+#### Data Processing Pipeline:
 1. FastQC on raw reads –> Trimmomatic (done!) –> FastQC on cleaned reads
 2. Reference transcriptome:
 ```
@@ -1459,7 +1459,7 @@ dim(countsTable)
 countsTableRound <- round(countsTable) * Need to round because DESeq wants only integers
 head(countsTableRound)
 ```
-# Import the samples description table - links each sample to factors of the experimental design.
+#### Import the samples description table - links each sample to factors of the experimental design.
 * Need the colClasses otherwise imports "day" as numeric which DESeq doesn't like, could alternatively change to d0, d5, d10
 ```
 conds <- read.delim("RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
@@ -1467,7 +1467,7 @@ head(conds)
 dim(conds)
 ```
 
-# Let's see how many reads we have from each sample:
+#### Let's see how many reads we have from each sample:
 ```
 colSums(countsTableRound)
 mean(colSums(countsTableRound))
@@ -1483,7 +1483,7 @@ abline(h=mean(colSums(countsTableRound)), col="blue", lwd =2)
 # Here you set your adjusted p-value cutoff, can make summary tables of the number of genes differentially expressed (up- or down-regulated) for each contrast
 ```
 
-##### Data visualization
+#### Data visualization
 ```
 # MA plot
 # PCA
