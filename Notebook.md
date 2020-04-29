@@ -2382,6 +2382,36 @@ ANGSD sites index ${output}/intersect.txt
 cat ${output}/intersect.txt | wc -l # 42,328,740 sites
 
 ```
+### Re-launching the genotype likelihoods estimation by keeping only intersecting sites (monomorphic and polymorphic)
+```
+
+myrepo="/data/project_data/GroupProjects/Glaciation/REGIONS"
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+POP="CORE"
+
+ANGSD -b ${myrepo}/${POP}/${POP}_bam.list \
+-GL 1 \
+-out ${myrepo}/${POP}/${POP}_intersect2 \
+-ref ${REF} \
+-anc ${REF} \
+-sites ${myrepo}/intersect.txt \
+-rf ${myrepo}/intersect.chrs \
+-nThreads 2 \
+-uniqueOnly 1 \
+-remove_bads 1 \
+-C 50 \
+-doSaf 1 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-skipTriallelic 1 \
+-doMaf 1 \
+-doMajorMinor 1 \
+-fold 1
+
+# Re do for each region 
+```
 
 
 ------
@@ -2389,7 +2419,31 @@ cat ${output}/intersect.txt | wc -l # 42,328,740 sites
 
 ### Entry 84: 2020-04-27, Monday.   
 
+### Create SFS 
 
+```
+#!/bin/bash
+
+myrepo="/data/project_data/GroupProjects/Glaciation"
+
+output="${myrepo}/REGIONS"
+
+POP1="CORE"
+POP2="EDGE"
+POP3="MARGIN"
+
+#SFS for each POP
+
+#CORE SFS
+realSFS ${output}/${POP1}/${POP1}_intersect2.saf.idx -maxIter 50000 -tole 1e-6 -P 5 > ${output}/${POP1}/${POP1}_intersect2.sfs
+
+#EDGE SFS
+realSFS ${output}/${POP2}/${POP2}_intersect2.saf.idx -maxIter 50000 -tole 1e-6 -P 5 > ${output}/${POP2}/${POP2}_intersect2.sfs
+
+#MARGIN SFS
+realSFS ${output}/${POP3}/${POP3}_intersect2.saf.idx -maxIter 50000 -tole 1e-6 -P 5 > ${output}/${POP3}/${POP3}_intersect2.sfs
+
+```
 
 ------
 <div id='id-section85'/>   
