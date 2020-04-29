@@ -686,7 +686,7 @@ ll /data/project_data/RS_ExomeSeq/ReferenceGenomes/
 pwd
 ll /data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa
 echo ${mypop}
-mypop="KOS_01"
+mypop="GFM_01"
 ref="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
 #write a loop to map eac individual within my population
  for forward in ${input}*_R1.cl.pd.fq; do reverse=${forward/_R1.cl.pd.fq/_R2.cl.pd.fq}; f=${forward/_R1.cl.pd.fq/}; name=`basename ${f}`; bwa mem -t 1 -M ${ref} ${forward} ${reverse} > ${output}/BWA/${name}.sam; done
@@ -706,10 +706,10 @@ exit
 
 ```
 ll /data/project_data/RS_ExomeSeq/mapping/BWA/
-ll /data/project_data/RS_ExomeSeq/mapping/BWA/KOS*
-ll /data/project_data/RS_ExomeSeq/mapping/BWA/KOS*bai
-ll /data/project_data/RS_ExomeSeq/mapping/BWA/KOS*.ba
-ll /data/project_data/RS_ExomeSeq/mapping/BWA/KOS*bam
+ll /data/project_data/RS_ExomeSeq/mapping/BWA/GFM*
+ll /data/project_data/RS_ExomeSeq/mapping/BWA/GFM*bai
+ll /data/project_data/RS_ExomeSeq/mapping/BWA/GFM*.ba
+ll /data/project_data/RS_ExomeSeq/mapping/BWA/GFM*bam
 exit
 
 ```
@@ -755,9 +755,9 @@ Sam file is human readeable
 ```
 /data/project_data/RS_ExomeSeq/mapping/BWA/
 ll
-ll KOS*sam
-head KOS_01.sam
-tail KOS_01.sam
+ll GFM*sam
+head GFM_01.sam
+tail GFM_01.sam
 ```
 * A row of data consists of a potential data. The first row is the reads name. the next number is a flag (e.g 147 can be known by a SAM decode- means the read was paired. It was mapped together as forward and reverse. It’s the second read in the pair. It’s the reverse read.r)
 * When a read maps to more than one spot its not a primary alignment the next is the contig that the read mapped to (MA_18732) the left most position of the read. 60 is the base quality score, 6 orders of magnitude, it’s a very strong match- mapping quality (MAQ) 
@@ -775,7 +775,7 @@ How can we get a summary of how well our reads mapped to the reference?
 * We can use the program samtools Written by Heng Li, the same person who wrote bwa. It is a powerful tool for manipulating sam/bam files.
 * The command flagstat gets us some basic info on how well the mapping worked:
 ```
-samtools flagstat KOS_01.sam
+samtools flagstat GFM_01.sam
 filename sorted.rmdup.bam
 filename sorted.rmdup.bai
 writing bamstats scripts
@@ -787,7 +787,7 @@ writing bamstats scripts
 ```
 myrepo="/users/s/n/bblack/Ecological-Genomics-2020"
 
-mypop="KOS"
+mypop="GFM"
 
 output="/data/project_data/RS_ExomeSeq/mapping"
 
@@ -881,14 +881,14 @@ setMaxDepthInd- We set a max depth for individual we can accept to remove PCR du
 ```
 cd /data/project_data/RS_ExomeSeq/mapping/BWA/
 ll
-ll KOS*sam
-head KOS_01.sam
-tail KOS_01.sam
-samtools flagstat KOS_01.sam
+ll GFM*sam
+head GFM_01.sam
+tail GFM_01.sam
+samtools flagstat GFM_01.sam
 cd ~/Ecological-Genomics-2020/
 pwd
 /users/s/n/bblack/Ecological-Genomics-2020
-mypop="KOS"
+mypop="GFM"
 myrepo="/users/s/n/snnadi/Ecological-Genomics-2020"
 output="/data/project_data/RS_ExomeSeq/mapping"
 echo "num.reads R1 R2 Paired MateMapped Singletons MateMappedDiffChr" > ${myrepo}/myresults/${mypop}.flagstats.txt
@@ -917,14 +917,14 @@ pwd
 myrepo=/users/s/n/snnadi/Ecological-Genomics-2020
 mkdir ${myrepo}/myresults/ANGSD
 output="${myrepo}/myresults/ANGSD"
-mypop="KOS"
+mypop="GFM"
 ls /data/project_data/RS_ExomeSeq/mapping/BWA/${mypop}_*sorted.rm*.bam >${output} /${mypop}_bam.list
 ll
 cd myresults
 ll
 cd ANGSD/
 ll
-cat KOS_bam.list
+cat GFM_bam.list
 REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
 screen -s ANGSD
 screen -r ANGSD
@@ -1062,7 +1062,7 @@ thetaStat do_stat ${output}/${mypop}_folded_allsites.thetas.idx
 setwd("~/GitHub/Ecological-Genomics-2020/myresults")
 list.files()
 
-SFS <- scan("KOS_outFold.sfs")
+SFS <- scan("GFM_outFold.sfs")
 
 sumSFS <- sum(SFS)
 
@@ -1074,7 +1074,7 @@ plotSFS <- SFS[-c(1,length(SFS))]
 
 barplot(plotSFS)
 
-div <-read.table("KOS_folded_allsites.thetas.idx.pestPG")
+div <-read.table("GFM_folded_allsites.thetas.idx.pestPG")
 
 colnames(div) =c("window","chrname","winscenter","tW","tP","tF","tH","tL","tajD","fulif","fuliD","fayH","zengsE","numSites")
 
