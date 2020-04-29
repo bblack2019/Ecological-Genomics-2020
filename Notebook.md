@@ -2272,9 +2272,72 @@ write.table(file = "/Users/scottblack/Desktop/pbio381/Epigenetics/Epigenetics_da
 
 ### Entry 81: 2020-04-22, Wednesday.   
 
+## Glaciation Project Scripts 
+
+### PWD:
+```
+/data/project_data/GroupProjects/Glaciation
+```
+
+### Extract Bam Files from each region to bam.list files 
+```
+#use grep on the metadata file that contains which region each individual belongs to. 
+grep -w "E" RS_Exome_metadata.txt | cut -f3 >/pathtoyourgroupfolder/EdgeInds.txt
+
+#do that in turn for each of the other regions want to pull out…
+
+# cd to the all/ folder with all the bams and do:
+
+/data/project_data/RS_Exome/mapping/BWA/all
+ls *bam* | grep -f /pathtogroupfolder/EdgeInds.txt >/pathtogroupfolder/EdgeBams.bamlist
+
+#do that in turn for each of the other regions want to pull out…
+```
+### ANGSD Scripts for each region (CORE Example)
+
+```
+#!/ein/bash
+
+myrepo="/data/project_data/GroupProjects/Glaciation"
+
+#mkdir ${myrepo}/myresults/ANGSD
+
+output="${myrepo}/REGIONS/CORE"
+
+POP="CORE"
+
+#ls /data/project_data/RS_ExomeSeq/mapping/BWA/${mypop}_*sorted.rm*.bam >${output}/${mypop}_bam.list
+
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+ANGSD -b ${output}/${POP}_bam.list \
+-ref ${REF} \
+-anc ${REF} \
+-out ${output}/${POP} \
+-nThreads 4 \
+-remove_bads 1 \
+-uniqueOnly 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doHWE 1 \
+-doCounts 1 \
+-doMaf 1 \
+-doSaf 1 \
+-doMajorMinor 1 \
+-doGlf 1
+
+#do this in turn for each of the other regions
+```
+###
 
 
-------
 <div id='id-section82'/>   
 
 ### Entry 82: 2020-04-23, Thursday.   
