@@ -2457,7 +2457,43 @@ realSFS ${output}/${POP3}/${POP3}_intersect2.saf.idx -maxIter 50000 -tole 1e-6 -
 
 ### Entry 86: 2020-04-29, Wednesday.   
 
+### Create Beagle file for NGS Admix genotype cluster analysis 
 
+### Create Bam list for whole sample
+```
+ ls /data/project_data/RS_ExomeSeq/mapping/all/*bam > /data/project_data/GroupProjects/Glaciation/SampleFull_bam.list
+
+```
+
+### ANGSD Beagle files for whole sample:
+```
+myrepo="/data/project_data/GroupProjects/Glaciation"
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+#Beagle file creation for full sample
+ANGSD -b ${myrepo}/FullSample_bam.list \
+-out ${myrepo}/out \
+-ref ${REF} \
+-anc ${REF} \
+-nThreads 5 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-dosaf 1 \
+-minQ 20 \
+-minInd 50 \
+-doGlf 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 15 \
+-skipTriallelic 1 \
+edoMajorMinor 1 \
+-dosaf 1 \
+-GL 1 \
+-doMaf 1 \
+-SNP_pval 1e-6 \
+-doCounts 1 
+```
 
 ------
 <div id='id-section87'/>   
