@@ -2349,6 +2349,39 @@ ANGSD -b ${output}/${POP}_bam.list \
 
 ### Entry 83: 2020-04-24, Friday.   
 
+### Finding loci intersection among regions
+```
+#!/bin/bash
+
+myrepo="/data/project_data/GroupProjects/Glaciation"
+
+output="${myrepo}/REGIONS"
+
+POP1="CORE"
+POP2="EDGE"
+POP3="MARGIN"
+
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+# Finding loci intersection among regions
+#Transform .gz files into site text files
+zcat ${output}/${POP1}/CORE.mafs.gz | awk 'BEGIN { OFS = ":" }{ print $1,$2 }' | sed '1d' | sort > ${output}/${POP1}/CORE_sites.txt
+zcat ${output}/${POP2}/EDGE.mafs.gz | awk 'BEGIN { OFS = ":" }{ print $1,$2 }' | sed '1d' | sort > ${output}/${POP2}/EDGE_sites.txt
+zcat ${output}/${POP3}/MARGIN.mafs.gz | awk 'BEGIN { OFS = ":" }{ print $1,$2 }' | sed '1d' | sort > ${output}/${POP3}/MARGIN_sites.txt
+
+#Compare region text files and unite into one main sites text file
+comm -12 ${output}/${POP1}/CORE_sites.txt ${output}/${POP2}/EDGE_sites.txt > ${output}/CORE_EDGE_sites.txt
+comm -12 ${output}/CORE_EDGE_sites.txt ${output}/${POP3}/MARGIN_sites.txt > ${output}/CORE_EDGE_MARGIN_sites.txt
+
+#Sort, cut, and index into intersecting sites text file
+sed 's/:/\t/' ${output}/CORE_EDGE_MARGIN_sites.txt | sort -b -k1,1 > ${output}/intersect.txt
+cut -f1 ${output}/intersect.txt | uniq | sort > ${output}/intersect.chrs
+ANGSD sites index ${output}/intersect.txt
+
+# Number of total sites with monomorphic and plolymorphic sites
+cat ${output}/intersect.txt | wc -l # 42,328,740 sites
+
+```
 
 
 ------
